@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Amaledu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Amaledu</string>
+    <string name="nav_header_subtitle">cumasafak@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-2480250351827652/4210665063</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_sinifdokuz">sinifdokuz</string>
+    <string name="tab_matematik">Matematik</string>
+    <string name="tab_edebiyat">Edebiyat</string>
+    <string name="tab_fizik">Fizik</string>
+    <string name="tab_biyoloji">Biyoloji</string>
+    <string name="tab_kimya">Kimya</string>
+
+    <string name="login">SIGN IN</string>
+    <string name="logup">SIGN UP</string>
+    <string name="password">Password</string>
+    <string name="password_again">Password again</string>
+    <string name="email">E-mail</string>
+    <string name="name_and_surname">Name and Surname</string>
+    <string name="or">or</string>
+    <string name="duyurular">Duyurular</string>
+    <string name="takvim">Takvim</string>
+    <string name="denemesonuclari">Deneme Sonuçları</string>
+    <string name="amaleduguncellemeleri">Amaledu Güncellemeleri</string>
+    <string name="sinifdokuz">Dokuzuncu Sınıf</string>
+    <string name="upload">Upload</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

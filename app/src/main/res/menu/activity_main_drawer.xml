@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_duyurular"
+            android:icon="@drawable/ic_web_black_24dp"
+            android:title="Web Sitesi" />
+        <item
+            android:id="@+id/nav_takvim"
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="Takvim" />
+        <item
+            android:id="@+id/nav_deneme_sonuclari"
+            android:icon="@drawable/ic_class_black_24dp"
+            android:title="Deneme Sonuçları" />
+        <item
+            android:id="@+id/nav_amaledu_guncellemeleri"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Amaledu Güncellemeleri" />
+    </group>
+
+    <item android:title="Sınıflar">
+        <menu>
+            <item
+                android:id="@+id/nav_dokuzuncu_sinif"
+                android:title="Dokuzuncu sınıf" />
+            <item
+                android:id="@+id/nav_onuncu_sinif"
+                android:title="Onuncu sınıf" />
+            <item
+                android:id="@+id/nav_onbirinci_sinif"
+                android:title="Onbirinci sınıf" />
+            <item
+                android:id="@+id/nav_onikinci_sinif"
+                android:title="Onikinci sınıf" />
+        </menu>
+    </item>
+
+</menu>

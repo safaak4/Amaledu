@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.safaak.amaledu">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/amaleduicon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/amaleduicon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2480250351827652~1667072836"/>
+
+        <activity android:name=".profilePage"></activity>
+        <activity
+            android:name=".OnikinciSinif"
+            android:label="Onikinci Sınıf"></activity>
+        <activity
+            android:name=".OnBirinciSinif"
+            android:label="Onbirinci Sınıf" />
+        <activity
+            android:name=".OnuncuSinif"
+            android:label="Onuncu Sınıf" />
+        <activity android:name=".PostPrivatePage" />
+        <activity
+            android:name=".DokuzuncuSinif"
+            android:label="Dokuzuncu Sınıf" />
+        <activity android:name=".upload_activity" />
+        <activity android:name=".register_page" />
+        <activity android:name=".login_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>

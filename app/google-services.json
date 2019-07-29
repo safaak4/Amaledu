@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "767442500005",
+    "firebase_url": "https://amaledu-b4fb2.firebaseio.com",
+    "project_id": "amaledu-b4fb2",
+    "storage_bucket": "amaledu-b4fb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767442500005:android:58388aef714da759",
+        "android_client_info": {
+          "package_name": "com.safaak.amaledu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767442500005-v4aj7528fuolfuj42gcj4orjdc4fj39f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.safaak.amaledu",
+            "certificate_hash": "ff7b04553af2b2893643d0a910a7923d9182671d"
+          }
+        },
+        {
+          "client_id": "767442500005-dbrgu6hcr3v33rtdpj18c6phrt1sorb5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoMTXGVFLk51mtvWCoYhRYEd-7gu0W4GM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767442500005-dbrgu6hcr3v33rtdpj18c6phrt1sorb5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
