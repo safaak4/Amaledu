@@ -32,12 +32,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.HashMap;
 
 public class register_page extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
-    EditText email1, password2, passwordagain, name, graduationYear;
+    EditText email1, password2, passwordagain, name, graduationYear, branchedittext;
     ImageView profilepicupload;
     Uri selectedImage2;
 
@@ -52,6 +53,7 @@ public class register_page extends AppCompatActivity {
         name = findViewById(R.id.editText3);
         graduationYear = findViewById(R.id.editText6);
         profilepicupload = findViewById(R.id.imageView2);
+        branchedittext = findViewById(R.id.editText9);
         mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
@@ -101,7 +103,8 @@ public class register_page extends AppCompatActivity {
     public void signUp(View view) {
 
         if (email1.getText().toString().matches("") || password2.getText().toString().matches("") || passwordagain.getText().toString().matches("")
-        || name.getText().toString().matches("") || !password2.getText().toString().equals(passwordagain.getText().toString()) || graduationYear.getText().toString().matches("")) {
+        || name.getText().toString().matches("") || !password2.getText().toString().equals(passwordagain.getText().toString()) || graduationYear.getText().toString().matches("")
+        || branchedittext.getText().toString().matches("") || branchedittext.getText().toString().length() != 0) {
             Toast.makeText(this, "Error in register: 0", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -174,6 +177,7 @@ public class register_page extends AppCompatActivity {
                             userData.put("usernameandsurname", userNameandSurname);
                             userData.put("useremail", userEmail2);
                             userData.put("graduation", graduationYear.getText().toString());
+                            userData.put("branch", branchedittext.getText().toString());
 
                             FirebaseFirestore.getInstance().collection("usersdata").document("allusers")
                                     .collection(userEmail2).document(userEmail2).set(userData)

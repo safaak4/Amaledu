@@ -13,15 +13,16 @@
         android:roundIcon="@drawable/amaleduicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Rapor_giris_ekrani"></activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2480250351827652~1667072836"/>
+            android:value="ca-app-pub-2480250351827652~1667072836" />
 
-        <activity android:name=".profilePage"></activity>
+        <activity android:name=".profilePage" />
         <activity
             android:name=".OnikinciSinif"
-            android:label="Onikinci Sınıf"></activity>
+            android:label="Onikinci Sınıf" />
         <activity
             android:name=".OnBirinciSinif"
             android:label="Onbirinci Sınıf" />
@@ -44,8 +45,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

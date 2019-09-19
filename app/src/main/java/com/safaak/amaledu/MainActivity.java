@@ -310,6 +310,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_onikinci_sinif) {
             Intent intent = new Intent(getApplicationContext(), OnikinciSinif.class);
             startActivity(intent);
+        } else if (id == R.id.nav_raporgir){
+            Intent intent = new Intent(getApplicationContext(), Rapor_giris_ekrani.class);
+            startActivity(intent);
         }
 
 

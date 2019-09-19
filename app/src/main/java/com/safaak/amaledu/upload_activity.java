@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -82,7 +83,7 @@ public class upload_activity extends AppCompatActivity {
 
         //spinner islemleri
         Spinner spinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(upload_activity.this, android.R.layout.simple_spinner_item,Siniflar);
+        ArrayAdapter adapter = new ArrayAdapter(upload_activity.this, R.layout.my_custom_spinneritem, Siniflar);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
 
@@ -90,6 +91,7 @@ public class upload_activity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 switch (i){
                     case 0:
                         sinif = 9;

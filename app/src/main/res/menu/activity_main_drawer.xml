@@ -20,6 +20,9 @@
             android:id="@+id/nav_amaledu_guncellemeleri"
             android:icon="@drawable/ic_menu_manage"
             android:title="Amaledu Güncellemeleri" />
+        <item
+            android:id="@+id/nav_raporgir"
+            android:title="Rapor Girişi" />
     </group>
 
     <item android:title="Sınıflar">
