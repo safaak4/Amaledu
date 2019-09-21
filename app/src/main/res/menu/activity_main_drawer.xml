@@ -22,7 +22,8 @@
             android:title="Amaledu Güncellemeleri" />
         <item
             android:id="@+id/nav_raporgir"
-            android:title="Rapor Girişi" />
+            android:title="Rapor Girişi"
+            android:icon="@drawable/ic_folder_shared"/>
     </group>
 
     <item android:title="Sınıflar">

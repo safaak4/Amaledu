@@ -104,7 +104,7 @@ public class register_page extends AppCompatActivity {
 
         if (email1.getText().toString().matches("") || password2.getText().toString().matches("") || passwordagain.getText().toString().matches("")
         || name.getText().toString().matches("") || !password2.getText().toString().equals(passwordagain.getText().toString()) || graduationYear.getText().toString().matches("")
-        || branchedittext.getText().toString().matches("") || branchedittext.getText().toString().length() != 0) {
+        || branchedittext.getText().toString().matches("") || branchedittext.getText().toString().length() != 1 || branchedittext.getText().toString().matches(" ")) {
             Toast.makeText(this, "Error in register: 0", Toast.LENGTH_SHORT).show();
         } else {
 

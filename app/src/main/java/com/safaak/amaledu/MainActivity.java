@@ -50,6 +50,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -278,6 +279,13 @@ public class MainActivity extends AppCompatActivity
         }else if(id == R.id.signout){
             FirebaseAuth.getInstance().signOut();
             super.onBackPressed();
+        }else if (id == R.id.yoneticisayfasi){
+            if (mAuth.getCurrentUser().getEmail() == "cumasafak@gmail.com" || mAuth.getCurrentUser().getEmail() == "cumasafak@windowslive.com"){
+                Intent intent = new Intent(getApplicationContext(), yoneticipanelii.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(this, "Buna izniniz yok", Toast.LENGTH_SHORT).show();
+            }
         }
 
         return super.onOptionsItemSelected(item);

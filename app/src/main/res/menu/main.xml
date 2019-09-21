@@ -16,6 +16,13 @@
         android:orderInCategory="100"
         android:title="Hata Geri Bildirimi"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/yoneticisayfasi"
+        android:orderInCategory="100"
+        android:title="Yönetici Paneli"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/signout"
         android:orderInCategory="100"
