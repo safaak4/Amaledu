@@ -13,10 +13,8 @@
         android:roundIcon="@drawable/amaleduicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".yoneticipanelii"
-            android:label="@string/title_activity_yoneticipanelii"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".raporlarinGorunumu"></activity>
+        <activity android:name=".siniflarinlistesi" />
         <activity android:name=".Rapor_giris_ekrani" />
 
         <meta-data

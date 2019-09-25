@@ -134,6 +134,7 @@ public class Rapor_giris_ekrani extends AppCompatActivity {
                                 girilenraporr.put("konu", calisilanKonuEditText.getText().toString());
                                 girilenraporr.put("soruvedakika", soruSayisiEditText.getText().toString());
                                 girilenraporr.put("sorudakikakontrol", "1");
+                                girilenraporr.put("email", mAuth.getCurrentUser().getEmail());
 
                                 //                 DERS ÇALIŞMANIN TARİHİ GİRİLECEK.           //  yapıldı
                                 // DİALOG İÇERİSİNE CALENDERVİEW YERLEŞTİR  //    yapıldı
@@ -189,6 +190,7 @@ public class Rapor_giris_ekrani extends AppCompatActivity {
                                 girilenraporr.put("konu", calisilanKonuEditText.getText().toString());
                                 girilenraporr.put("soruvedakika", calisilanDakikakEditText.getText().toString());
                                 girilenraporr.put("sorudakikakontrol", "0");
+                                girilenraporr.put("email", mAuth.getCurrentUser().getEmail());
 
                                 //                 DERS ÇALIŞMANIN TARİHİ GİRİLECEK.           //  yapıldı
                                 // DİALOG İÇERİSİNE CALENDERVİEW YERLEŞTİR  //    yapıldı

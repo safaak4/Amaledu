@@ -281,8 +281,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }else if (id == R.id.yoneticisayfasi){
             if (mAuth.getCurrentUser().getEmail() == "cumasafak@gmail.com" || mAuth.getCurrentUser().getEmail() == "cumasafak@windowslive.com"){
-                Intent intent = new Intent(getApplicationContext(), yoneticipanelii.class);
-                startActivity(intent);
+
             }else{
                 Toast.makeText(this, "Buna izniniz yok", Toast.LENGTH_SHORT).show();
             }
