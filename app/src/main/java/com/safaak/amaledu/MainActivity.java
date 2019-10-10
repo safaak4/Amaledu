@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        mAuth = FirebaseAuth.getInstance();
         listViewHome = findViewById(R.id.listViewHome);
 
         usercommentHomeFromFB = new ArrayList<String>();
@@ -280,8 +280,9 @@ public class MainActivity extends AppCompatActivity
             FirebaseAuth.getInstance().signOut();
             super.onBackPressed();
         }else if (id == R.id.yoneticisayfasi){
-            if (mAuth.getCurrentUser().getEmail() == "cumasafak@gmail.com" || mAuth.getCurrentUser().getEmail() == "cumasafak@windowslive.com"){
-
+            if (mAuth.getCurrentUser().getEmail().equals("cumasafak@gmail.com") || mAuth.getCurrentUser().getEmail().equals("cumasafak@windowslive.com")){
+                Intent intent = new Intent(getApplicationContext(), siniflarinlistesi.class);
+                startActivity(intent);
             }else{
                 Toast.makeText(this, "Buna izniniz yok", Toast.LENGTH_SHORT).show();
             }

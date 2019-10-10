@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
@@ -128,13 +129,14 @@ public class Rapor_giris_ekrani extends AppCompatActivity {
 
                                 HashMap<String, Object> girilenraporr = new HashMap<>();
                                 girilenraporr.put("isim", usersname);
-                                girilenraporr.put("sınıf", usersgraduation + usersbranch);
+                                girilenraporr.put("sinif", usersgraduation + usersbranch);
                                 girilenraporr.put("tarih", selectedDate);
                                 girilenraporr.put("ders", secilenders);
                                 girilenraporr.put("konu", calisilanKonuEditText.getText().toString());
                                 girilenraporr.put("soruvedakika", soruSayisiEditText.getText().toString());
                                 girilenraporr.put("sorudakikakontrol", "1");
                                 girilenraporr.put("email", mAuth.getCurrentUser().getEmail());
+                                girilenraporr.put("date", FieldValue.serverTimestamp());
 
                                 //                 DERS ÇALIŞMANIN TARİHİ GİRİLECEK.           //  yapıldı
                                 // DİALOG İÇERİSİNE CALENDERVİEW YERLEŞTİR  //    yapıldı
@@ -184,16 +186,20 @@ public class Rapor_giris_ekrani extends AppCompatActivity {
 
                                 HashMap<String, Object> girilenraporr = new HashMap<>();
                                 girilenraporr.put("isim", usersname);
-                                girilenraporr.put("sınıf", usersgraduation + usersbranch);
+                                girilenraporr.put("sinif", usersgraduation + usersbranch);
                                 girilenraporr.put("tarih", selectedDate);
                                 girilenraporr.put("ders", secilenders);
                                 girilenraporr.put("konu", calisilanKonuEditText.getText().toString());
                                 girilenraporr.put("soruvedakika", calisilanDakikakEditText.getText().toString());
                                 girilenraporr.put("sorudakikakontrol", "0");
                                 girilenraporr.put("email", mAuth.getCurrentUser().getEmail());
+                                girilenraporr.put("date", FieldValue.serverTimestamp());
 
                                 //                 DERS ÇALIŞMANIN TARİHİ GİRİLECEK.           //  yapıldı
                                 // DİALOG İÇERİSİNE CALENDERVİEW YERLEŞTİR  //    yapıldı
+
+
+
 
                                 FirebaseFirestore.getInstance().collection("raporlar").document(usersgraduation).collection(usersbranch)
                                         .document(documentdatee).set(girilenraporr)
