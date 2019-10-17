@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/amaleduicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".raporlarinGorunumu"></activity>
+        <activity android:name=".odevlerinGorunumu"></activity>
+        <activity android:name=".raporlarinGorunumu" />
         <activity android:name=".siniflarinlistesi" />
         <activity android:name=".Rapor_giris_ekrani" />
 

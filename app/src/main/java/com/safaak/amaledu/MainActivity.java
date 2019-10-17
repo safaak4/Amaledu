@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity
     HomePostClass adapter0;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -307,6 +306,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_amaledu_guncellemeleri) {
                         setFragment(amaleduGuncellemeleriFragment);
         } else if (id == R.id.nav_dokuzuncu_sinif) {
+            //setFragment(sinifDokuzFragment);
             Intent intent = new Intent(getApplicationContext(), DokuzuncuSinif.class);
             startActivity(intent);
         } else if (id == R.id.nav_onuncu_sinif) {

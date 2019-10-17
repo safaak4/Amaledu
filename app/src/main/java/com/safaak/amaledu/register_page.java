@@ -118,19 +118,19 @@ public class register_page extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
 
-                                    FirebaseAuth auth = FirebaseAuth.getInstance();
-                                    FirebaseUser user = auth.getCurrentUser();
-
-                                    user.sendEmailVerification()
+                                    //FirebaseAuth auth = FirebaseAuth.getInstance();
+                                    //FirebaseUser user = auth.getCurrentUser();
+                                    createProfileOnFirestore();
+                                    /*user.sendEmailVerification()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(register_page.this, "Doğrulama maili gönderildi", Toast.LENGTH_SHORT).show();
-                                                        createProfileOnFirestore();
+
                                                     }
                                                 }
-                                            });
+                                            }); */
 
 
                                 } else {
@@ -185,11 +185,27 @@ public class register_page extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Void aVoid) {
 
+                                            mAuth.getCurrentUser().sendEmailVerification()
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Toast.makeText(register_page.this, "Doğrulama maili gönderildi", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
+
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(register_page.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            storageReference2.delete();
+                                        }
+                                    });
                                 }
                             });
 
@@ -201,9 +217,8 @@ public class register_page extends AppCompatActivity {
                             mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(register_page.this, "Error", Toast.LENGTH_SHORT).show();
                                     storageReference2.delete();
-
+                                    Toast.makeText(register_page.this, "Bir hata oluştu!", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -215,6 +230,13 @@ public class register_page extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            storageReference2.delete();
+
+                        }
+                    });
                     Toast.makeText(register_page.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });

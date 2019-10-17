@@ -6,14 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -28,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -59,6 +64,8 @@ public class raporlarinGorunumu extends AppCompatActivity {
                 odevgonderdialogg.setContentView(R.layout.odevgonderdialog);
                 odevgonderdialogg.setTitle("Ödev Gönder: " + donem + sube);
 
+
+
                 final EditText odevgonderEditText = odevgonderdialogg.findViewById(R.id.odevgonderEditText);
                 Button odevgonderbutton = odevgonderdialogg.findViewById(R.id.odevgonderButton);
 
@@ -69,7 +76,7 @@ public class raporlarinGorunumu extends AppCompatActivity {
                         if (!odevgonderEditText.getText().toString().matches("")){
 
                             FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-                            DocumentReference documentReference = firebaseFirestore.collection(donem).document(sube);
+                            final DocumentReference documentReference = firebaseFirestore.collection(donem).document(sube);
 
                             HashMap<String, Object> odevData = new HashMap<>();
                             odevData.put("ogretmenemail", FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -79,8 +86,45 @@ public class raporlarinGorunumu extends AppCompatActivity {
                             documentReference.set(odevData).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(raporlarinGorunumu.this, "Başarılı!" + donem + sube, Toast.LENGTH_SHORT).show();
-                                    odevgonderdialogg.dismiss();
+                                    //isim alınır
+                                    DocumentReference documentReference11 = FirebaseFirestore.getInstance().collection("usersdata").document("allusers")
+                                            .collection(FirebaseAuth.getInstance().getCurrentUser().getEmail()).document(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+                                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                                            if (task.isSuccessful()){
+                                                DocumentSnapshot documentSnapshot = task.getResult();
+                                                if (documentSnapshot.exists()){
+                                                    String usersname = documentSnapshot.getData().get("usernameandsurname").toString();
+
+                                                    //ödev upload edilir
+                                                    HashMap<String, Object> odevmap = new HashMap<>();
+                                                    odevmap.put("odevtext", odevgonderEditText.getText().toString());
+                                                    odevmap.put("ogretmen", usersname);
+                                                    odevmap.put("sinif", donem+sube);
+
+                                                    UUID uuid = UUID.randomUUID();
+                                                    FirebaseFirestore.getInstance().collection("odevler").document(donem)
+                                                            .collection(sube).document(uuid.toString()).set(odevmap);
+
+
+                                                    Toast.makeText(raporlarinGorunumu.this, "Başarılı!" + donem + sube, Toast.LENGTH_SHORT).show();
+                                                    odevgonderdialogg.dismiss();
+
+                                                }
+                                            }
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(raporlarinGorunumu.this, "İsminiz alınamadı", Toast.LENGTH_SHORT).show();
+                                            odevgonderdialogg.dismiss();
+                                        }
+                                    });
+
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
