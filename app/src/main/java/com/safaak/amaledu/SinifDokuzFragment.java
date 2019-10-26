@@ -62,7 +62,7 @@ public class SinifDokuzFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_dokuzuncu_sinif, container, false);
+        View view = inflater.inflate(R.layout.fragment_sinif_dokuz, container, false);
 
         //listView = view.findViewById(R.id.listView);
 
@@ -137,7 +137,7 @@ public class SinifDokuzFragment extends Fragment {
         });
     }*/
 
-    public void getDataFromFirebaseFirestore(){
+   /* public void getDataFromFirebaseFirestore(){
 
 
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -172,7 +172,7 @@ public class SinifDokuzFragment extends Fragment {
                         }
                     }
                 });
-    }
+    } */
 
     public SinifDokuzFragment() {
         // Required empty public constructor

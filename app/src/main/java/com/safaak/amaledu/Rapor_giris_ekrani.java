@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -186,7 +187,7 @@ public class Rapor_giris_ekrani extends AppCompatActivity {
 
                                 HashMap<String, Object> girilenraporr = new HashMap<>();
                                 girilenraporr.put("isim", usersname);
-                                girilenraporr.put("sinif", usersgraduation + usersbranch);
+                                girilenraporr.put("sinif", usersgraduation + usersbranch.toLowerCase());
                                 girilenraporr.put("tarih", selectedDate);
                                 girilenraporr.put("ders", secilenders);
                                 girilenraporr.put("konu", calisilanKonuEditText.getText().toString());
@@ -197,8 +198,6 @@ public class Rapor_giris_ekrani extends AppCompatActivity {
 
                                 //                 DERS ÇALIŞMANIN TARİHİ GİRİLECEK.           //  yapıldı
                                 // DİALOG İÇERİSİNE CALENDERVİEW YERLEŞTİR  //    yapıldı
-
-
 
 
                                 FirebaseFirestore.getInstance().collection("raporlar").document(usersgraduation).collection(usersbranch)
@@ -250,6 +249,41 @@ public class Rapor_giris_ekrani extends AppCompatActivity {
             }
         });
         tarihsecdialog.show();
+    }
+
+    public void raporlarimigor(View view) {
+
+        final DocumentReference documentReference = FirebaseFirestore.getInstance().collection("usersdata").document("allusers")
+                .collection(mAuth.getCurrentUser().getEmail()).document(mAuth.getCurrentUser().getEmail());
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+
+                    if (documentSnapshot.exists()){
+
+
+                        String usersgraduation = documentSnapshot.getData().get("graduation").toString();
+                        String usersbranch = documentSnapshot.getData().get("branch").toString();
+
+                        Intent intent00 = new Intent(getApplicationContext(), raporlarinGorunumu.class);
+                        intent00.putExtra("extrasinif", usersgraduation).putExtra("extrasube", usersbranch);
+                        startActivity(intent00);
+
+
+
+
+                    }
+                }
+
+            }
+        });
+
+        //Intent intent122 = new Intent(getApplicationContext(), raporlarinGorunumu.class);
+        //startActivity(intent122);
     }
 
 }

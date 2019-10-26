@@ -286,7 +286,7 @@ public class PostPrivatePage extends AppCompatActivity {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         CollectionReference collectionReference2 = firebaseFirestore.collection("comments").document(postCommentID).collection("commentss");
         collectionReference2
-                .orderBy("date", Query.Direction.DESCENDING)
+                .orderBy("date", Query.Direction.ASCENDING)
                 .addSnapshotListener(this, new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {

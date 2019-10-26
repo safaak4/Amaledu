@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     ListView listViewHome;
     HomePostClass adapter0;
 
+    public String currentUserGraduation, currentUserBranch, currentUserProfilePic, currentUserNameandSurname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,18 +110,7 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), upload_activity.class);
-                startActivity(intent);
-
-                /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show(); */
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -136,6 +126,20 @@ public class MainActivity extends AppCompatActivity
         usernameonnavigation = headerView.findViewById(R.id.textViewUserName);
 
         navigationislemleri();
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), upload_activity.class);
+                intent.putExtra("currentname", currentUserNameandSurname).putExtra("currentprofilepic", currentUserProfilePic);
+                startActivity(intent);
+
+                /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show(); */
+            }
+        });
 
     }
 
@@ -172,16 +176,6 @@ public class MainActivity extends AppCompatActivity
     private void navigationislemleri(){
 
         String currentEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        final String imageName21 = "images/users/"+ currentEmail +".jpg";
-        StorageReference storageReferenceForProfilePicUrl = FirebaseStorage.getInstance().getReference(imageName21);
-        storageReferenceForProfilePicUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                String downloadUrl = uri.toString();
-                Picasso.get().load(downloadUrl).resize(150,150).into(profilepicinnavigation);
-            }
-        });
-
 
         FirebaseFirestore firebaseFirestore2 = FirebaseFirestore.getInstance();
         DocumentReference documentReference = firebaseFirestore2.collection("usersdata").document("allusers")
@@ -194,8 +188,13 @@ public class MainActivity extends AppCompatActivity
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()) {
                         //System.out.println("DocumentSnapshot data: " + document.getData().get("usernameandsurname"));
+                        currentUserGraduation = (String) document.getData().get("graduation");
+                        currentUserBranch = (String) document.getData().get("branch");
+                        currentUserNameandSurname = (String) document.getData().get("usernameandsurname");
+                        currentUserProfilePic = (String) document.getData().get("profilepic");
 
-                        usernameonnavigation.setText(document.getData().get("usernameandsurname").toString());
+                        Picasso.get().load(currentUserProfilePic).resize(150,150).into(profilepicinnavigation);
+                        usernameonnavigation.setText(currentUserNameandSurname);
                     }else {
                         //System.out.println("No such document");
                     }
@@ -247,29 +246,11 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             final String currentEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-            FirebaseFirestore firebaseFirestore3 = FirebaseFirestore.getInstance();
-            final DocumentReference documentReference = firebaseFirestore3.collection("usersdata").document("allusers")
-                    .collection(currentEmail).document(currentEmail);
-            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                    if(task.isSuccessful()){
-                        DocumentSnapshot documentSnapshot = task.getResult();
-                        if (documentSnapshot.exists()){
-                            String profilepicurl = documentSnapshot.getData().get("profilepic").toString();
-                            String username = documentSnapshot.getData().get("usernameandsurname").toString();
-                            String usergraduation = documentSnapshot.getData().get("graduation").toString();
-
-
-                            Intent intent = new Intent(getApplicationContext(), profilePage.class);
-                            intent.putExtra("profilepic", profilepicurl).putExtra("username", username)
-                                    .putExtra("email", currentEmail).putExtra("graduation", usergraduation);
-                            startActivity(intent);
-                        }
-                    }
-                }
-            });
+            Intent intent = new Intent(getApplicationContext(), profilePage.class);
+            intent.putExtra("profilepic", currentUserProfilePic).putExtra("username", currentUserNameandSurname)
+                    .putExtra("email", currentEmail).putExtra("graduation", currentUserGraduation);
+            startActivity(intent);
 
         }else if(id == R.id.userfeedback){
             setFragment(userFeedbackForm);
@@ -281,6 +262,7 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.yoneticisayfasi){
             if (mAuth.getCurrentUser().getEmail().equals("cumasafak@gmail.com") || mAuth.getCurrentUser().getEmail().equals("cumasafak@windowslive.com")){
                 Intent intent = new Intent(getApplicationContext(), siniflarinlistesi.class);
+                intent.putExtra("usernameee", currentUserNameandSurname);
                 startActivity(intent);
             }else{
                 Toast.makeText(this, "Buna izniniz yok", Toast.LENGTH_SHORT).show();
@@ -305,6 +287,10 @@ public class MainActivity extends AppCompatActivity
                //     setFragment(denemeSonuclariFragment);
         } else if (id == R.id.nav_amaledu_guncellemeleri) {
                         setFragment(amaleduGuncellemeleriFragment);
+        } else if (id == R.id.nav_odevlerim) {
+                Intent intent = new Intent(getApplicationContext(), odevlerinGorunumu.class);
+                intent.putExtra("donem", currentUserGraduation).putExtra("sube", currentUserBranch);
+                startActivity(intent);
         } else if (id == R.id.nav_dokuzuncu_sinif) {
             //setFragment(sinifDokuzFragment);
             Intent intent = new Intent(getApplicationContext(), DokuzuncuSinif.class);

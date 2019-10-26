@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".Rapor_giris_ekrani">
 
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="97dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="43dp"
+        android:background="#ef7f1a"
+        android:onClick="raporlarimigor"
+        android:text="Raporlarımı gör"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/button6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button6" />
+
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="0dp"

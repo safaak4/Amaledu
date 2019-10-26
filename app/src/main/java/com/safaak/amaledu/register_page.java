@@ -64,7 +64,7 @@ public class register_page extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
         }
-
+//secret missile
     }
 
     @Override
@@ -109,7 +109,8 @@ public class register_page extends AppCompatActivity {
         } else {
 
             int graduationYearInteger = Integer.parseInt(graduationYear.getText().toString());
-            if ( graduationYearInteger >= 2020 && graduationYearInteger <= 2025) {
+            if ( graduationYearInteger == 2020 || graduationYearInteger == 2021 || graduationYearInteger == 2022 ||
+            graduationYearInteger == 2023 || graduationYearInteger == 2024) {
 
                 mAuth.createUserWithEmailAndPassword(email1.getText().toString(), password2.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -117,7 +118,6 @@ public class register_page extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (task.isSuccessful()) {
-
                                     //FirebaseAuth auth = FirebaseAuth.getInstance();
                                     //FirebaseUser user = auth.getCurrentUser();
                                     createProfileOnFirestore();
@@ -131,10 +131,11 @@ public class register_page extends AppCompatActivity {
                                                     }
                                                 }
                                             }); */
-
-
                                 } else {
                                     Toast.makeText(register_page.this, "Error in register: 1", Toast.LENGTH_SHORT).show();
+                                    if (mAuth.getCurrentUser() != null) {
+                                        mAuth.getCurrentUser().delete();
+                                    }
                                 }
 
                             }
@@ -177,7 +178,7 @@ public class register_page extends AppCompatActivity {
                             userData.put("usernameandsurname", userNameandSurname);
                             userData.put("useremail", userEmail2);
                             userData.put("graduation", graduationYear.getText().toString());
-                            userData.put("branch", branchedittext.getText().toString());
+                            userData.put("branch", branchedittext.getText().toString().toLowerCase());
 
                             FirebaseFirestore.getInstance().collection("usersdata").document("allusers")
                                     .collection(userEmail2).document(userEmail2).set(userData)
@@ -186,14 +187,25 @@ public class register_page extends AppCompatActivity {
                                         public void onSuccess(Void aVoid) {
 
                                             mAuth.getCurrentUser().sendEmailVerification()
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Toast.makeText(register_page.this, "Doğrulama maili gönderildi!", Toast.LENGTH_SHORT).show();
+                                                            register_page.super.onBackPressed();
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(register_page.this, "Doğrulama maili gönderilemedi!", Toast.LENGTH_SHORT).show();
+                                                    mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                Toast.makeText(register_page.this, "Doğrulama maili gönderildi", Toast.LENGTH_SHORT).show();
-                                                            }
+                                                            storageReference2.delete();
+                                                            //TODO veritabanındaki bilgileri de sil
                                                         }
                                                     });
+                                                }
+                                            });
 
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
@@ -209,7 +221,6 @@ public class register_page extends AppCompatActivity {
                                 }
                             });
 
-
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -221,10 +232,8 @@ public class register_page extends AppCompatActivity {
                                     Toast.makeText(register_page.this, "Bir hata oluştu!", Toast.LENGTH_SHORT).show();
                                 }
                             });
-
                         }
                     });
-
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -234,7 +243,6 @@ public class register_page extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             storageReference2.delete();
-
                         }
                     });
                     Toast.makeText(register_page.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -249,7 +257,5 @@ public class register_page extends AppCompatActivity {
             });
         }
 
-
     }
-
 }

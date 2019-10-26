@@ -83,10 +83,6 @@ public class DokuzuncuSinif extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                // valla aklıma gelmiyor
-                // deneme yanılma be garides gafalar
-                // umarım bunları github'da biri okumaz
-
 
                 Intent intent = new Intent(getApplicationContext(), PostPrivatePage.class);
                 //intent.putExtra(useremailFromFB.get(position), 0);
@@ -236,7 +232,6 @@ public class DokuzuncuSinif extends AppCompatActivity {
                 for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){
 
                     Map<String, Object> data = snapshot.getData();
-
                     String comment = (String) data.get("usercomment");
                     String username = (String) data.get("usersname");
                     String useremail = (String) data.get("username");

@@ -72,6 +72,7 @@ public class upload_activity extends AppCompatActivity {
         postCommentText = findViewById(R.id.postCommentText);
         postImage = findViewById(R.id.postImage);
 
+
         //firebaseDatabase = FirebaseDatabase.getInstance();
         //myRef = firebaseDatabase.getReference();
 
@@ -189,47 +190,14 @@ public class upload_activity extends AppCompatActivity {
 
                                 String userComment = postCommentText.getText().toString();
 
-
-                                //UUID uuidtwo = UUID.randomUUID();
-                                //String uuidString = uuidtwo.toString();
-
-                                FirebaseFirestore firebaseFirestore3 = FirebaseFirestore.getInstance();
-                                DocumentReference documentReference = firebaseFirestore3.collection("usersdata").document("allusers")
-                                        .collection(userEmail).document(userEmail);
-                                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                                        if(task.isSuccessful()){
-                                            DocumentSnapshot documentSnapshot = task.getResult();
-                                            if (documentSnapshot.exists()){
-                                                String usersname = documentSnapshot.getData().get("usernameandsurname").toString();
-                                                String profilepicc = documentSnapshot.getData().get("profilepic").toString();
-
-                                                int downloadurllenght = downloadURL.length();
-                                                int downloadurllenght0 = downloadurllenght - 36;
-                                                String postCommentIDD = downloadURL.substring(downloadurllenght0, downloadurllenght);
-
-                                                HashMap<String, Object> postName = new HashMap<>();
-                                                postName.put("usersname", usersname);
-                                                postName.put("profilepic", profilepicc);
-
-                                                FirebaseFirestore.getInstance().collection("ninthgradeposts").document(postCommentIDD).update(postName);
-
-
-                                            }
-                                        }
-
-
-                                    }
-                                });
-
                                 HashMap<String, Object> postData = new HashMap<>();
                                 postData.put("username", userEmail);
                                 postData.put("usercomment", userComment);
                                 postData.put("downloadurl", downloadURL);
                                 postData.put("date", FieldValue.serverTimestamp());
                                 postData.put("now", nowstring);
+                                postData.put("usersname", getIntent().getExtras().get("currentname"));
+                                postData.put("currentprofilepic", getIntent().getExtras().get("profilepic"));
 
                                 int downloadurllenght = downloadURL.length();
                                 int downloadurllenght0 = downloadurllenght - 36;
